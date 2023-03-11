@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+<body>
+
+
+    <div class="clock">
+      <div class="clock-face">
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+        <div class="center-point"></div>
+      </div>
+    </div>
+
+
+  <style>
+    html {
+      background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+      background-size: cover;
+      font-family: 'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      margin: 0;
+      font-size: 2rem;
+      display: flex;
+      flex: 1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock {
+      width: 30rem;
+      height: 30rem;
+      border: 20px solid white;
+      border-radius: 50%;
+      margin: 50px auto;
+      position: relative;
+      padding: 2rem;
+      box-shadow:
+        0 0 0 4px rgba(0,0,0,0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px); /* account for the height of the clock hands */
+    }
+
+    .hand {
+      width: 50%;
+      height: 6px;
+      background: black;
+      position: absolute;
+      top: 50%;
+      transform-origin: 100%;
+      border-radius: 5px;
+      rotate: 90deg;
+      transition: all 0.1 ease-in-out;
+    }
+
+    .second-hand {
+      scale: 1.1;
+      height: 4px;
+    }
+
+    .hour-hand {
+      scale: 0.8;
+      height: 10px;
+    }
+
+    .center-point {
+      background: black;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+  </style>
+
+  <script>
+
+//  # my Solution
+// --------------------------------------
+
+    const secondsArrow = document.querySelector(".second-hand");
+    const minutesArrow = document.querySelector(".min-hand");
+    const hoursArrow = document.querySelector(".hour-hand");
+
+    function ticToc() {
+      const thisDay = new Date();
+      const seconds = thisDay.getSeconds();
+      const minutes = thisDay.getMinutes();
+      const hours = thisDay.getHours();
+      const secondsStep = 360/60;
+      const minutesStep = 360/60;
+      const hoursStep = 360/12;
+      secondsArrow.setAttribute("style", `transform: rotate(${90 + seconds*secondsStep}deg);`)
+      // secondsArrow.style.transform = `rotate(${90 + seconds*secondsStep}deg);`;
+
+      minutesArrow.setAttribute("style", `transform: rotate(${90 + minutes*minutesStep}deg);`)
+      // minutesArrow.style.transform = `rotate(${90 + minutes*minutesStep}deg);`
+
+      hoursArrow.setAttribute("style", `transform: rotate(${90 + hours*hoursStep}deg);`)
+      // hoursArrow.style.transform = `rotate(${90 + hours*hoursStep}deg);`;
+    }
+    setInterval(ticToc, 1000);
+
+// # Wes Solution
+// ---------------------------------
+
+  </script>
+</body>
+</html>
